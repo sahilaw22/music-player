@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lyricify Music Player</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Lyricify Player 🎵</h1>
+    </header>
+    <main class="player">
+      <input type="file" id="songFile" accept="audio/*" />
+      <img id="albumArt" src="default-art.png" alt="Album Art" />
+      <audio id="audio" controls></audio>
+      <pre id="lyricsDisplay"></pre>
+    </main>
+    <div class="playlist" id="playlistContainer">
+      <h2>Your Playlist</h2>
+      <ul id="playlist"></ul>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
