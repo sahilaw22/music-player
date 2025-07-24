@@ -7,20 +7,145 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>Lyricify Player 🎵</h1>
-    </header>
-    <main class="player">
-      <input type="file" id="songFile" accept="audio/*" />
-      <img id="albumArt" src="default-art.png" alt="Album Art" />
-      <audio id="audio" controls></audio>
-      <pre id="lyricsDisplay"></pre>
+  <div class="app-container" data-theme="dark">
+    <!-- Left Panel - Player Controls -->
+    <aside class="left-panel">
+      <header class="app-header">
+        <div class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+          <span>☰</span>
+        </div>
+        <h1 class="app-title">
+          <span>🎵</span>
+          Lyricify
+        </h1>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+          <span>☀️</span>
+        </button>
+      </header>
+
+      <div class="search-section">
+        <div class="search-container">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchInput" placeholder="Search songs, artists..." aria-label="Search music" />
+          <button class="search-clear" id="searchClear" aria-label="Clear search">
+            <span>✕</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="player-section">
+        <div class="album-art-container">
+          <img id="albumArt" src="default-art.png" alt="Album artwork" />
+          <div class="upload-overlay">
+            <input type="file" id="songFile" accept="audio/*" aria-label="Upload audio file" />
+            <label for="songFile" class="upload-label">
+              <span>➕</span>
+              <span>Add Music</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="track-info">
+          <h3 id="trackTitle">No track selected</h3>
+          <p id="trackArtist">Unknown Artist</p>
+        </div>
+
+        <div class="progress-container">
+          <span id="currentTime">0:00</span>
+          <div class="progress-bar" id="progressBar">
+            <div class="progress-fill" id="progressFill"></div>
+            <div class="progress-handle" id="progressHandle"></div>
+          </div>
+          <span id="duration">0:00</span>
+        </div>
+
+        <div class="controls">
+          <button class="control-btn secondary" id="shuffleBtn" title="Shuffle">
+            <span>🔀</span>
+          </button>
+          <button class="control-btn secondary" id="prevBtn" title="Previous track">
+            <span>⏮️</span>
+          </button>
+          <button class="control-btn primary" id="playPauseBtn" title="Play/Pause">
+            <span>▶️</span>
+          </button>
+          <button class="control-btn secondary" id="nextBtn" title="Next track">
+            <span>⏭️</span>
+          </button>
+          <button class="control-btn secondary" id="repeatBtn" title="Repeat">
+            <span>🔁</span>
+          </button>
+        </div>
+
+        <div class="volume-section">
+          <span>🔉</span>
+          <div class="volume-slider">
+            <input type="range" id="volumeSlider" min="0" max="100" value="50" aria-label="Volume control" />
+          </div>
+          <span>🔊</span>
+          <button class="control-btn secondary" id="likeBtn" title="Like this track">
+            <span>🤍</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="playlist-section">
+        <div class="playlist-header">
+          <h2>Playlist</h2>
+          <span id="playlistCount">0 tracks</span>
+        </div>
+        <div class="playlist-container" id="playlistContainer">
+          <ul id="playlist" role="list"></ul>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Right Panel - Lyrics -->
+    <main class="right-panel">
+      <div class="lyrics-header">
+        <h2>Lyrics</h2>
+        <div class="lyrics-controls">
+          <button class="lyrics-btn" id="autoScrollBtn" title="Auto-scroll lyrics">
+            <span>📜</span>
+          </button>
+          <button class="lyrics-btn" id="fontSizeBtn" title="Adjust font size">
+            <span>🔤</span>
+          </button>
+        </div>
+      </div>
+      <div class="lyrics-container" id="lyricsContainer">
+        <div class="lyrics-content" id="lyricsDisplay">
+          <div class="no-lyrics">
+            <span style="font-size: 3rem;">🎵</span>
+            <p>No lyrics available</p>
+            <p class="subtitle">Upload a song to see lyrics here</p>
+          </div>
+        </div>
+      </div>
     </main>
-    <div class="playlist" id="playlistContainer">
-      <h2>Your Playlist</h2>
-      <ul id="playlist"></ul>
-    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <nav class="mobile-nav" id="mobileNav">
+      <div class="nav-overlay" id="navOverlay"></div>
+      <div class="nav-drawer">
+        <div class="nav-header">
+          <h3>Menu</h3>
+          <button class="nav-close" id="navClose">
+            <span>✕</span>
+          </button>
+        </div>
+        <ul class="nav-menu">
+          <li><a href="#"><span>🏠</span> Home</a></li>
+          <li><a href="#"><span>🔍</span> Search</a></li>
+          <li><a href="#"><span>📋</span> Playlists</a></li>
+          <li><a href="#"><span>❤️</span> Liked Songs</a></li>
+          <li><a href="#"><span>⚙️</span> Settings</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Hidden audio element -->
+    <audio id="audio" preload="metadata"></audio>
   </div>
   <script src="app.js"></script>
 </body>
